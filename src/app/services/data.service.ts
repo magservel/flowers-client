@@ -1,12 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from 'rxjs';
 
 export interface Data {
 	dataX: string;
 	dataY: string;
 }
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class DataService {
 
 	data = [
@@ -58,16 +61,18 @@ export class DataService {
 			);
 	}
 
-	inferDataFromModel(data: any) {
-		this.http.post<any>(this.api_url + '/api/infer', JSON.stringify(data))
-		.subscribe(
-			(response) => {
-				this.inferResult = response.data;
-				console.log(JSON.stringify(response));
-			},
-			(error) => {
-				console.log('Error occured ! : ' + error.message);
-			}
-		);
+	inferDataFromModel(data: any): Observable<Data> {
+		return this.http.post<Data>(this.api_url + '/api/infer', JSON.stringify(data));
+		
+		// this.http.post<any>(this.api_url + '/api/infer', JSON.stringify(data))
+		// .subscribe(
+		// 	(response) => {
+		// 		this.inferResult = response.data;
+		// 		console.log(JSON.stringify(response));
+		// 	},
+		// 	(error) => {
+		// 		console.log('Error occured ! : ' + error.message);
+		// 	}
+		// );
 }
 	}

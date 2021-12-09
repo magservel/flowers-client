@@ -1,40 +1,33 @@
-<div style="text-align:center">
-	<h1>Welcome to {{ title }}</h1>
-</div>	
-
-<!-- <app-navigation></app-navigation> -->
-
 
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
 
-			<form class="form-inline" (ngSubmit)="onAdd(addF)" #addF="ngForm">
-				<label>X</label><input type="text" class="form-control" name="add_x" placeholder="X" ngModel> 
-				<label> Y</label><input type="text" class="form-control" name="add_y" placeholder="Y" ngModel>
+			<app-navigation></app-navigation>
 
-				<button type="submit" class="btn btn-primary">+ Add data pair</button>
-			</form>		
-			<br>
+			<div style="text-align:center">
+				<h1>{{ title }}</h1>
+			</div>	
 
-			<form class="form-inline" (ngSubmit)="onInfer(inferF)" #inferF="ngForm">
-				<label>X</label><input type="text" class="form-control" name="infer_x" placeholder="X" ngModel> 
-				<label> Result</label><input type="text" class="form-control-plaintext" name="infer_y" placeholder="{{ inferResult }}" ngModel readonly> 
-				<button type="submit" class="btn btn-primary">Get prediction from model</button>
-			</form>		
-			<br>
+					
+		<button (click)="showToasterSuccess()">
+			Success Toaster
+		</button>
+		
+		<button (click)="showToasterError()">
+			Error Toaster
+		</button>
+		
+		<button (click)="showToasterInfo()">
+			Info Toaster
+		</button>
+		
+		<button (click)="showToasterWarning()">
+			Warning Toaster
+		</button>
 
-			<button type="button" class="btn btn-primary" (click)="onTrain()">Train model</button>
-			<button type="button" class="btn btn-primary" (click)="onRefresh()">Refresh data list</button>
-
-      <p style="text-align:right;">Last update: {{ lastUpdate | date: 'short' }}</p>
-      <ul class="list-group">
-
-				<app-data *ngFor="let d of data"
-									[dataX]="d.x"
-									[dataY]="d.y">
-				</app-data>
-      </ul>
+			<router-outlet></router-outlet>
+      
     </div>
   </div>
 </div>

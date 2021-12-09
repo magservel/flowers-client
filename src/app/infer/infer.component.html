@@ -1,0 +1,7 @@
+<p>infer works!</p>
+
+<form class="form-inline" (ngSubmit)="onInfer(inferF)" #inferF="ngForm">
+	<label>X</label><input type="text" class="form-control" name="infer_x" placeholder="X" ngModel> 
+	<label> Result</label><input type="text" class="form-control-plaintext" name="infer_y" placeholder="{{ inferResult }}" ngModel readonly> 
+	<button type="submit" class="btn btn-primary">Get prediction from model</button>
+</form>
