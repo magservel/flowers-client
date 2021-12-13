@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { DataComponent } from './data/data.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DataService } from './services/data.service';
@@ -17,16 +16,15 @@ import { AddComponent } from './add/add.component';
 import { InferComponent } from './infer/infer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NotificationService } from './services/notification.service';
 
 
 
 const appRoutes: Routes = [
 	{ path: 'home', component: HomeComponent },
-	{ path: 'data', component: DataComponent },
 	{ path: 'list', component: ListComponent},
 	{ path: 'train', component: TrainComponent },
 	{ path: 'add', component: AddComponent },
-	{ path: 'infer', component: InferComponent },
 	{ path: '', component: HomeComponent }
 ];
 
@@ -34,7 +32,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavigationComponent,
-    DataComponent,
     ListComponent,
     TrainComponent,
     HomeComponent,
@@ -52,7 +49,8 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(appRoutes)
   ],
   providers: [
-		DataService
+		DataService,
+		NotificationService,
 	],
   bootstrap: [AppComponent]
 })

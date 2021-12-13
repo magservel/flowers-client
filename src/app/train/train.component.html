@@ -1,3 +1,3 @@
-<!-- <button type="button" class="btn btn-primary" (click)="onTrain()">Train model</button> -->
-
-<p>train works!</p>
+<button id="train_button" type="button" class="btn btn-primary" (click)="onTrain()" [disabled]="training">
+	{{ training ? "Training ..." : "Train model" }}
+</button>

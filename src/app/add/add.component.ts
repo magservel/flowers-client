@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DataService } from '../services/data.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-add',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
-
+	
+	onAdd(form: NgForm) {
+		this.dataService.addDataToModel(form.value)
+		.subscribe(
+				(resp) => {
+					if (resp.success == "OK") {
+						this.notificationService.showSuccess(resp.message, "Success");
+					} else {
+						this.notificationService.showError(resp.message, "Application Error");
+					}
+				},
+			(error) => {
+				this.notificationService.showError(error.message, "Server Error");
+			}
+		);
+	}
 }

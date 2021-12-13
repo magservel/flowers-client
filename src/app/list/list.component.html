@@ -1,11 +1,19 @@
-<!-- <button type="button" class="btn btn-primary" (click)="onRefresh()">Refresh data list</button>
-<p style="text-align:right;">Last update: {{ lastUpdate | date: 'short' }}</p> -->
-<!-- <ul class="list-group">
+<app-train></app-train>
 
-	<app-data *ngFor="let d of data"
-						[dataX]="d.x"
-						[dataY]="d.y">
-	</app-data>
-</ul> -->
-
-<p> List works !</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">X</th>
+      <th scope="col">Y</th>
+      <th scope="col">Data use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of data_list">
+      <td>{{ d.x }}</td>
+      <td>{{ d.y }}</td>
+      <td>{{ d.train  ? "Train" : "Test" }}</td>
+    </tr>
+    
+  </tbody>
+</table>

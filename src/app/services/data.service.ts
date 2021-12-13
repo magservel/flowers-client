@@ -12,67 +12,25 @@ export interface Data {
 })
 export class DataService {
 
-	data = [
-		{x: 'a', y: '1'},
-		{x: 'b', y: '2'},
-		{x: 'c', y: '3'}
-	];
-
-	inferResult = "None";
 
 	constructor(private http: HttpClient) {}
 
 	api_url = 'http://localhost:5000';
 
-	trainModel() {
-		this.http.get(this.api_url + '/api/train')
-			.subscribe(
-				() => {
-					console.log('Model trained succesfully !');
-				},
-				(error) => {
-					console.log('Error occured ! : ' + error.message);
-				}
-			);
+	trainModel(): Observable<any> {
+		return this.http.get<any>(this.api_url + '/api/train');
 	}
 
-	getDataList() {
-		this.http.get<any>(this.api_url + '/api/list')
-			.subscribe(
-				(response) => {
-					this.data = response.data;
-				},
-				(error) => {
-					console.log('Error occured ! : ' + error.message);
-				}
-			);
+	getDataList(): Observable<any> {
+		return this.http.get<any>(this.api_url + '/api/list');
 	}
 
 
-	addDataToModel(data: Data) {
-		this.http.post(this.api_url + '/api/add', JSON.stringify(data))
-			.subscribe(
-				(response) => {
-					console.log('Data added succesfully !' + JSON.stringify(response));
-				},
-				(error) => {
-					console.log('Error occured ! : ' + error.message);
-				}
-			);
+	addDataToModel(data: Data): Observable<any> {
+		return this.http.post(this.api_url + '/api/add', JSON.stringify(data));		
 	}
 
-	inferDataFromModel(data: any): Observable<Data> {
+	inferDataFromModel(data: any): Observable<any> {
 		return this.http.post<Data>(this.api_url + '/api/infer', JSON.stringify(data));
-		
-		// this.http.post<any>(this.api_url + '/api/infer', JSON.stringify(data))
-		// .subscribe(
-		// 	(response) => {
-		// 		this.inferResult = response.data;
-		// 		console.log(JSON.stringify(response));
-		// 	},
-		// 	(error) => {
-		// 		console.log('Error occured ! : ' + error.message);
-		// 	}
-		// );
-}
 	}
+}
