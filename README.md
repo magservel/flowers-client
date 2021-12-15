@@ -1,3 +1,14 @@
+# To run the client 
+```
+git clone https://github.com/magservel/flowers-client.git
+cd flowers-client/
+npm install
+ng update
+npm update
+
+ng -o serve 
+```
+
 # FlowersClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
