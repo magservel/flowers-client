@@ -11,7 +11,12 @@ export class TrainComponent implements OnInit {
 
   constructor(private dataService: DataService, private notificationService : NotificationService) { }
 
-	training: boolean=false;
+	training: boolean = false;
+	lastTraining!: Date;
+	loss: string = " ";
+	accuracy: string = " ";
+
+
   ngOnInit(): void {
   }
 
@@ -22,6 +27,10 @@ export class TrainComponent implements OnInit {
 				(resp) => {
 					if (resp.success == "OK") {
 						this.notificationService.showSuccess("Model trained successfully", "Success");
+						this.lastTraining = new Date();
+						var data = JSON.parse(resp.data);
+						this.loss = data.loss;
+						this.accuracy = data.accuracy;
 					} else {
 						this.notificationService.showError(resp.message, "Application Error");
 					}
@@ -29,9 +38,7 @@ export class TrainComponent implements OnInit {
 				},
 			(error) => {
 				this.notificationService.showError(error.message, "Server Error");
-				console.log(error);
 				this.training = false;
-
 			}
 			
 		);

@@ -16,18 +16,23 @@ export class AddComponent implements OnInit {
   }
 	
 	onAdd(form: NgForm) {
-		this.dataService.addDataToModel(form.value)
-		.subscribe(
-				(resp) => {
-					if (resp.success == "OK") {
-						this.notificationService.showSuccess(resp.message, "Success");
-					} else {
-						this.notificationService.showError(resp.message, "Application Error");
-					}
-				},
-			(error) => {
-				this.notificationService.showError(error.message, "Server Error");
-			}
-		);
+		if (form.value.data_use === "") {
+			this.notificationService.showError("Please select data use", "Form Error");
+		} else {
+			console.log(form.value)
+			this.dataService.addDataToModel(form.value)
+			.subscribe(
+					(resp) => {
+						if (resp.success == "OK") {
+							this.notificationService.showSuccess(resp.message, "Success");
+						} else {
+							this.notificationService.showError(resp.message, "Application Error");
+						}
+					},
+				(error) => {
+					this.notificationService.showError(error.message, "Server Error");
+				}
+			);
+		}
 	}
 }

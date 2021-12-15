@@ -1,3 +1,4 @@
 <button id="train_button" type="button" class="btn btn-primary" (click)="onTrain()" [disabled]="training">
 	{{ training ? "Training ..." : "Train model" }}
 </button>
+<p><b>Last training:</b> {{ lastTraining | date : 'dd/MM/yy HH:mm' }} -- <b>Loss:</b> {{ loss }} -- <b>Accuracy:</b> {{ accuracy }}</p>
